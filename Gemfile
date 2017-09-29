@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 
-gem 'font-awesome-rails'
+gem 'font-awesome-sass'
 gem 'haml-rails'
 gem 'react_on_rails'
 gem 'rails', '~> 5.1.4'

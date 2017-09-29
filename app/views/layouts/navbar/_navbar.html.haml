@@ -1,0 +1,39 @@
+.navbar.navbar-default.navbar-fixed-top
+  .container
+    .navbar-header
+      -#= link_to Admin::Setting.app_title, root_path, class: 'navbar-brand'
+      %span.navbar-brand Rails Base project
+      %button.navbar-toggle{"data-target" => "#navbar-main", "data-toggle" => "collapse", :type => "button"}
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+    #navbar-main.navbar-collapse.collapse
+      %ul.nav.navbar-nav
+        %li.dropdown
+          %a#themes.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            Dropdown Menu
+            %span.caret
+          %ul.dropdown-menu{"aria-labelledby" => "themes"}
+            %li
+              %a{:href => "#"} Default
+            %li.divider
+            %li
+              %a{:href => "#"} Foo
+            %li
+              %a{:href => "#"} Bar
+            %li
+              %a{:href => "#"} Batz
+            %li
+              %a{:href => "#"} Barf
+        %li
+          %a{:href => "#"} Some
+        %li
+          %a{:href => "#"} Stuff
+      %ul.nav.navbar-nav.navbar-right
+        -#%li
+        -#  = link_to 'Admin area', admin_dashboard_path if current_user.is_admin?
+        -#%li
+        -#  - if current_user.guest?
+        -#    = link_to 'Sign in', login_url
+        -#  - else
+        -#    = render 'layouts/navbar/user_dropdown'
