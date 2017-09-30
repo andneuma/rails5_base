@@ -31,8 +31,8 @@
       %ul.nav.navbar-nav.navbar-right
         -#%li
         -#  = link_to 'Admin area', admin_dashboard_path if current_user.is_admin?
-        -#%li
-        -#  - if current_user.guest?
-        -#    = link_to 'Sign in', login_url
-        -#  - else
-        -#    = render 'layouts/navbar/user_dropdown'
+        - if user_signed_in?
+          %li= render 'layouts/navbar/user_dropdown'
+        - else
+          %li= link_to 'Sign in', new_user_session_path
+          %li= link_to 'Sign up', new_user_registration_path
