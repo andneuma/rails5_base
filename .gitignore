@@ -57,7 +57,17 @@ public/capybara.html
 /vendor/bundle
 
 # CTags
-.tags*
+tags
 
 # Node modules
 node_modules
+
+# Public assets
+public/assets/
+public/packs/
+public/packs-test
+
+Guardfile
+
+# Secrets
+config/initializers/secret_token.rb

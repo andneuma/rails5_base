@@ -8,7 +8,7 @@ class CreateSettings < ActiveRecord::Migration[5.1]
       t.integer "user_activation_tokens", default: 2,               null: false
       t.text    "app_privacy_policy",     default: 'Privacy',       null: false
       t.text    "app_imprint",            default: 'Imprint',       null: false
-      t.string  "captcha_system",         default: "none",          null: false
+      t.string  "captcha_system",         default: nil
 
       t.timestamps
     end

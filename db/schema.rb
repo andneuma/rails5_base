@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170929213443) do
+ActiveRecord::Schema.define(version: 20171002123102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "activation_tokens", force: :cascade do |t|
+    t.string "token", default: "", null: false
+    t.boolean "redeemed", default: false, null: false
+    t.datetime "redeemed_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.index ["user_id"], name: "index_activation_tokens_on_user_id"
+  end
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -51,12 +61,13 @@ ActiveRecord::Schema.define(version: 20170929213443) do
     t.string "name", default: "Yet another configuration", null: false
     t.string "app_title", default: "Generic title", null: false
     t.string "relay_email_address", default: "foo@bar.org", null: false
-    t.integer "user_activation_tokens", default: 2, null: false
+    t.integer "activation_tokens_spawned", default: 2, null: false
     t.text "app_privacy_policy", default: "Privacy", null: false
     t.text "app_imprint", default: "Imprint", null: false
-    t.string "captcha_system", default: "none", null: false
+    t.string "captcha_system"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "activation_tokens_required", default: 0
   end
 
   create_table "users", force: :cascade do |t|
@@ -71,4 +82,5 @@ ActiveRecord::Schema.define(version: 20170929213443) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "activation_tokens", "users"
 end

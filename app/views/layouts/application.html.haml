@@ -9,5 +9,5 @@
   %body
     = render 'layouts/navbar/navbar'
     .main-container.container-full
-      = render 'layouts/util/flash_messages'
+      = render 'layouts/util/flash_messages', flash: flash
       = yield

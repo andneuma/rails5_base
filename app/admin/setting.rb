@@ -1,5 +1,9 @@
 ActiveAdmin.register Setting do
-	permit_params :app_title, :relay_email_address, :captcha_system
+	permit_params :name,
+								:app_title, :relay_email_address,
+								:app_privacy_policy, :app_imprint,
+								:activation_tokens_spawned, :activation_tokens_required,
+								:captcha_system
 
 	member_action :activate_settings, method: :get do
 		# Deactivate all settings objects
@@ -54,7 +58,8 @@ ActiveAdmin.register Setting do
 
 				div(id: 'users') do
 					f.inputs do
-						f.input :user_activation_tokens, as: :number, label: 'Activation tokens per new User'
+						f.input :activation_tokens_spawned, as: :number, label: 'Activation tokens per new User', max: 5
+						f.input :activation_tokens_required, as: :number, label: 'Acitvation tokens required for sign up'
 					end
 				end
 

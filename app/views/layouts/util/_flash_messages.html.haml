@@ -1,4 +1,6 @@
 - flash.each do |type, msg|
   .container
-    .alert{class: "alert-#{type}", role: 'alert', id: 'flash-messages'}
+    %div{:class => "alert alert-#{bootstrap_class_for(type)} alert-block alert-dismissable fade in"}
+      %a.close{"data-dismiss" => "alert", :href => "#"} ×
       = msg
+

@@ -1,7 +1,7 @@
 .navbar.navbar-default.navbar-fixed-top
   .container
     .navbar-header
-      = link_to 'Rails base project', root_path, class: 'navbar-brand'
+      = link_to Setting.current_settings.app_title, root_path, class: 'navbar-brand'
       %button.navbar-toggle{"data-target" => "#navbar-main", "data-toggle" => "collapse", :type => "button"}
         %span.icon-bar
         %span.icon-bar

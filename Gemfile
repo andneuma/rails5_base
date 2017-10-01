@@ -30,12 +30,15 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
 
 group :development, :test do
-  gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
   gem 'pry-byebug'
+	# gem 'ruby-debug-ide'
+	# gem 'debase'
 end
 
 group :test do
+  gem 'capybara'
+  gem 'capybara-screenshot'
   gem 'database_cleaner'
   gem 'factory_girl_rails'
   gem 'guard'

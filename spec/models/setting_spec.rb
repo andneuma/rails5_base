@@ -7,24 +7,34 @@ RSpec.describe Setting, type: :model do
     it { is_expected.to respond_to :name }
     it { is_expected.to respond_to :active }
 
-    it 'implements current settings' do
-      expect(Setting).to respond_to :current_settings
-    end
-
     it { is_expected.to respond_to :relay_email_address }
     it { is_expected.to respond_to :app_title }
     it { is_expected.to respond_to :app_imprint }
     it { is_expected.to respond_to :app_privacy_policy }
-    it { is_expected.to respond_to :user_activation_tokens }
+
+    it { is_expected.to respond_to :activation_tokens_spawned }
+    it { is_expected.to respond_to :activation_tokens_required }
+
+    context 'Current settings' do
+      it 'implements current settings' do
+        expect(Setting).to respond_to :current_settings
+      end
+
+      it 'returns if current settings requires activation tokens for user registration' do
+        settings = create :settings, activation_tokens_required: 2, active: true
+
+        expect(Setting.current_settings.require_activation_tokens).to be true
+      end
+    end
   end
 
   context 'Activation tokens' do
     it 'defaults to 2' do
-      expect(Setting.create.user_activation_tokens).to be 2
+      expect(Setting.create.activation_tokens_spawned).to be 2
     end
 
     it 'does not except invalid number of activation tokens' do
-      settings = build :settings, user_activation_tokens: -1
+      settings = build :settings, activation_tokens_spawned: -1
 
       expect(settings).not_to be_valid
     end
@@ -41,7 +51,7 @@ RSpec.describe Setting, type: :model do
       settings = create :settings, app_privacy_policy: '<center>Privacy rulez!</center>'
 
       expect(settings.app_privacy_policy).to eq 'Privacy rulez!'
-		end
+    end
   end
 
   context 'Validations' do
