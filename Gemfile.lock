@@ -151,6 +151,8 @@ GEM
     public_suffix (3.0.0)
     puma (3.10.0)
     rack (2.0.3)
+    rack-attack (5.0.1)
+      rack
     rack-protection (2.0.0)
       rack
     rack-proxy (0.6.2)
@@ -303,6 +305,7 @@ DEPENDENCIES
   poltergeist
   pry-byebug
   puma (~> 3.7)
+  rack-attack
   rails (~> 5.1.4)
   react_on_rails
   responders
