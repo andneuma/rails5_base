@@ -88,4 +88,17 @@ Rails.application.configure do
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
+  config.action_controller.default_url_options = { host: '' }
+  config.action_mailer.smtp_settings = {
+    address: ENV['relay_address'],
+    port: ENV['relay_port'],
+    user_name: ENV['relay_login'],
+    password: ENV['relay_passwd'],
+    authentication: ENV['relay_auth'],
+    enable_starttls_auto: true
+  }
 end
