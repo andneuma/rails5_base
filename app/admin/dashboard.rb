@@ -6,6 +6,13 @@ ActiveAdmin.register_page "Dashboard" do
 
     # Here is an example of a simple dashboard with columns and panels.
     columns do
+
+      column do
+        panel "Info" do
+          para "Welcome to ActiveAdmin. Feel free to put some stuff here..."
+        end
+      end
+      
       column do
         panel "Latest users" do
           ul do
@@ -16,11 +23,6 @@ ActiveAdmin.register_page "Dashboard" do
         end
       end
 
-      column do
-        panel "Info" do
-          para "Welcome to ActiveAdmin."
-        end
-      end
     end
   end # content
 end

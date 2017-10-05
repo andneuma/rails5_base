@@ -14,7 +14,7 @@ ActiveAdmin.register Setting do
 		redirect_to admin_settings_path
 	end
 
-	index do
+  index row_class: ->(setting) { 'active' if setting.active? } do
 		selectable_column
 		column 'Schema name', :name
 		column :created_at
@@ -22,7 +22,9 @@ ActiveAdmin.register Setting do
 			item 'View', admin_setting_path(settings), class: 'member_link view_link'
 			item 'Edit', edit_admin_setting_path(settings), class: 'member_link edit_link'
 			item 'Destroy', admin_setting_path(id: settings.id), data: { confirm: 'Are you sure you want to delete this configuration scheme?'}, method: :delete,  class: 'member_link delete_link'
-			item 'Activate', activate_settings_admin_setting_path(settings), class: 'member_link activate_link' unless settings.active
+      unless settings.active
+        item 'Activate', activate_settings_admin_setting_path(settings), class: 'member_link activate_link'
+      end
 		end
 	end
 
