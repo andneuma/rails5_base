@@ -1,20 +1,26 @@
 = devise_error_messages!
 .container
-  %h2 Log in
-  = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+  #content
     .row
-      .col-xs-12.col-md-6
-        = f.label :email
-        = f.email_field :email, autofocus: true, class: 'form-control'
-      .col-xs-12.col-md-6
-        = f.label :password
-        = f.password_field :password, placeholder: 'Password', autocomplete: "off", class: 'form-control'
-      .col-xs-12
-        - if devise_mapping.rememberable?
-          .field
-            = f.check_box :remember_me
-            = f.label :remember_me
-    .row.button-row
-      .col-xs-12
-        = f.submit "Log in", class: 'btn btn-success btn-small'
-    = render "devise/shared/links"
+      .heading.text-center
+        %h1 Sign in
+      .col-sm-8.col-sm-offset-2
+        .well.panel-wrap
+          .panel
+            .panel-body
+              = form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+                %fieldset
+                  .form-group.float-label-control.required
+                    = f.label :email
+                    = f.email_field :email, autofocus: true, class: 'form-control'
+                  .form-group.float-label-control.required
+                    = f.label :password
+                    = f.password_field :password, placeholder: 'Password', autocomplete: "off", class: 'form-control'
+                  .form-group
+                    = f.submit "Log in", class: 'btn btn-primary btn-block'
+                  .clearfix
+                  .register-or-resetpw.top15
+                    %small
+                      = link_to("Sign up", new_registration_path(resource_name)) if devise_mapping.registerable? && controller_name != 'registrations'
+                      .resetpw.pull-right
+                        = link_to("Forgot your password?", new_password_path(resource_name)) if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations'
