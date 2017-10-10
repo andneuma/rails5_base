@@ -1,5 +1,5 @@
 class User::RegistrationsController < Devise::RegistrationsController
-	include SettingsHelpers
+  include SettingsHelpers
 
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
@@ -66,9 +66,9 @@ class User::RegistrationsController < Devise::RegistrationsController
   # end
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
+  def configure_account_update_params
+    devise_parameter_sanitizer.permit(:account_update, keys: [:name, :email])
+  end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
@@ -80,8 +80,11 @@ class User::RegistrationsController < Devise::RegistrationsController
   #   super(resource)
   # end
 
-  private
+  def update_resource(resource, params)
+    resource.update_without_password(params)
+  end
 
+  private
   
   def activation_token_string
     (1..5).map { |c| "activation_token#{c}" }

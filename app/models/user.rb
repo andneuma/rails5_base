@@ -11,7 +11,7 @@ class User < ApplicationRecord
 				 # :timeoutable,
 				 # :omniauthable
 
-  has_many :activation_tokens
+  has_many :activation_tokens, dependent: :destroy
 
   after_create :spawn_activation_tokens
 
