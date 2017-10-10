@@ -7,4 +7,6 @@ class User < ApplicationRecord
          # :rememberable,
          # :trackable,
          :validatable
+
+  scope :recent, ->(n = 5) { order('created_at DESC').take(n) }
 end

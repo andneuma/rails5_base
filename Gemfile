@@ -5,6 +5,10 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+# Active Admin
+gem 'activeadmin'
+gem 'active_admin_flat_skin'
+
 gem 'coffee-rails'
 gem 'devise'
 gem 'faker', :git => 'git://github.com/stympy/faker.git', :branch => 'master'
