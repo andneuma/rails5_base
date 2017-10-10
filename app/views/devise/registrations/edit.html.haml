@@ -8,36 +8,67 @@
         .well.panel-wrap
           .panel
             .panel-body
-              = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-                %legend Edit account details
-                %fieldset
-                  .form-group.float-label-control.required
-                    = f.label :email
-                    = f.email_field :email, autofocus: true, class: 'form-control'
-                    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-                      %div
-                        Currently waiting confirmation for: #{resource.unconfirmed_email}
-                  .form-group.float-label-control
-                    = f.label :name
-                    = f.text_field :name, autofocus: false, class: 'form-control'
-                    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-                      %div
-                        Currently waiting confirmation for: #{resource.unconfirmed_email}
-                  -# .form-group.float-label-control
-                  -#   = f.label :password
-                  -#   %em (leave blank if you don't want to change it)
-                  -#   = f.password_field :password, autocomplete: "off", class: 'form-control'
-                  -# .form-group.float-label-control
-                  -#   = f.label :password_confirmation
-                  -#   = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
-                  -# .form-group.float-label-control
-                  -#   = f.label :current_password
-                  -#   %i (we need your current password to confirm your changes)
-                  -#   = f.password_field :current_password, autocomplete: "off", class: 'form-control'
-                  .clearfix
-                  .form-group
-                    = f.submit "Update", class: 'btn btn-primary btn-block'
+              -# Tabs
+              %ul.nav.nav-tabs
+                %li.active
+                  %a{"data-toggle" => "tab", :href => "#profile"} Profile
+                %li
+                  %a{"data-toggle" => "tab", :href => "#account"} Account
 
-                -# .row.button-row
-                -#   .col-xs-12
-                -#     %fieldset #{button_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure you want to delete this account" }, method: :delete, class: 'btn btn-danger btn-large' }
+              -# Tab contents
+              -# PROFILE
+              .tab-content
+                #profile.tab-pane.fade.in.active
+                  .clearfix
+                  %legend.form-subheading Profile
+                  = form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
+                    %fieldset
+                      .form-group.float-label-control
+                        = f.label :name
+                        = f.text_field :name, autofocus: false, class: 'form-control'
+                        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+                          %div
+                            Currently waiting confirmation for: #{resource.unconfirmed_email}
+                    .clearfix
+                    %legend.form-subheading Account credentials
+                    %fieldset
+                      .form-group.float-label-control.required
+                        = f.label :email
+                        = f.email_field :email, autofocus: true, class: 'form-control'
+                        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+                          %div
+                            Currently waiting confirmation for: #{resource.unconfirmed_email}
+                      .form-group.float-label-control
+                        = f.label :password
+                        %em (leave blank if you don't want to change it)
+                        = f.password_field :password, autocomplete: "off", class: 'form-control'
+                      .form-group.float-label-control
+                        = f.label :password_confirmation
+                        = f.password_field :password_confirmation, autocomplete: "off", class: 'form-control'
+                    .clearfix
+                    %fieldset
+                      .form-group.float-label-control.has-warning
+                        = f.label :current_password, 'Confirm changes with password*', class: 'control-label'
+                        = password_field_tag 'user[current_password]', '', class: 'form-control'
+                      .form-group
+                        = f.submit "Update", class: 'btn btn-primary btn-block'
+
+                -# ACCOUNT
+                #account.tab-pane.fade
+                  .clearfix
+                  %legend.form-subheading Status
+                  %fieldset
+                    - if devise_mapping.confirmable? && resource.pending_confirmation?
+                      %span.label.label-warning
+                        Waiting for confirmation
+                    - else
+                      %span.label.label-success
+                        Your account is currently active
+                  .clearfix
+                  %legend.form-subheading.warning Delete account
+                  %p
+                    Once you delete your account, there is no going back. Please be certain.
+                    .form-group
+                      = link_to "Delete my account", registration_path(resource_name), data: { confirm: "Are you sure you want to delete this account" }, method: :delete, class: 'btn btn-danger btn-sm'
+
+

@@ -3,13 +3,12 @@
   #content
     .row
       .heading.text-center
-        %h1 Sign up
+        %h1 Register a new account
       .col-sm-8.col-sm-offset-2
         .well.panel-wrap
           .panel
             .panel-body
               = form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
-                %legend Register a new account
                 %fieldset
                   - 1.upto(Setting.current_settings.activation_tokens_required) do |index|
                     .form-group.float-label-control.required

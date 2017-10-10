@@ -8,9 +8,9 @@ feature 'Edit and update user' do
   scenario 'Can update user with valid credentials' do
     visit edit_user_registration_path
     fill_in 'user_name', with: 'CHANGE'
+    fill_in 'user_current_password', with: 'secret'
     click_on 'Update'
 
-    binding.pry
     expect(User.first.reload.name).to eq 'CHANGE'
   end
 end
