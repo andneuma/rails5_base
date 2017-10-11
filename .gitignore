@@ -67,7 +67,5 @@ public/assets/
 public/packs/
 public/packs-test
 
-Guardfile
-
 # Secrets
 config/initializers/secret_token.rb

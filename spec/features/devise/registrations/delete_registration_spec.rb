@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 feature 'Delete registration' do
-  scenario 'It can delete active registration' do
+  scenario 'It can delete active registration', :js do
     sign_in
     visit edit_user_registration_path
     click_on 'Account'

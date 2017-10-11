@@ -43,3 +43,4 @@ end
 def click_sign_up
   find(:xpath, '//input[@value="Sign up"]').click 
 end
+
