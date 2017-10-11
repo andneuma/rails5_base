@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170929203601) do
+ActiveRecord::Schema.define(version: 20170929213443) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,6 +44,19 @@ ActiveRecord::Schema.define(version: 20170929203601) do
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
+  end
+
+  create_table "settings", force: :cascade do |t|
+    t.boolean "active", default: false, null: false
+    t.string "name", default: "Yet another configuration", null: false
+    t.string "app_title", default: "Generic title", null: false
+    t.string "relay_email_address", default: "foo@bar.org", null: false
+    t.integer "user_activation_tokens", default: 2, null: false
+    t.text "app_privacy_policy", default: "Privacy", null: false
+    t.text "app_imprint", default: "Imprint", null: false
+    t.string "captcha_system", default: "none", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
